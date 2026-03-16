@@ -8,7 +8,7 @@ const projects = [
     name: "Sera",
     subtitle: "AI Assistant",
     description:
-      "An intelligent AI assistant built with a RAG (Retrieval-Augmented Generation) system. It retrieves relevant context to deliver accurate, grounded responses — providing a smart, conversational experience powered by LLMs and a FastAPI backend.",
+      "An intelligent AI assistant built with a RAG system. It retrieves relevant context to deliver accurate, grounded responses — providing a smart, conversational experience powered by LLMs and a FastAPI backend.",
     projectUrl: "https://try-sera.vercel.app/",
     gradient: "from-emerald-500 to-teal-600",
     Icon: FaRobot,

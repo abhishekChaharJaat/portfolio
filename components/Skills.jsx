@@ -13,8 +13,11 @@ import {
   SiPython,
   SiFastapi,
   SiLangchain,
+  SiGit,
+  SiGithub,
+  SiPostman,
 } from "react-icons/si";
-import { FaServer, FaCode, FaDatabase, FaBrain } from "react-icons/fa";
+import { FaServer, FaCode, FaDatabase, FaBrain, FaRobot } from "react-icons/fa";
 
 const categories = [
   {
@@ -22,29 +25,33 @@ const categories = [
     skills: [
       { name: "React.js",     Icon: SiReact,      level: 70, iconColor: "#61DAFB", bar: "from-cyan-400 to-blue-500" },
       { name: "Next.js",      Icon: SiNextdotjs,  level: 65, iconColor: "#000000", bar: "from-slate-600 to-slate-400" },
-      { name: "Redux",        Icon: SiRedux,       level: 80, iconColor: "#764ABC", bar: "from-purple-500 to-violet-400" },
-      { name: "JavaScript",   Icon: SiJavascript,  level: 65, iconColor: "#F7DF1E", bar: "from-yellow-400 to-orange-400" },
-      { name: "Tailwind CSS", Icon: SiTailwindcss, level: 75, iconColor: "#06B6D4", bar: "from-cyan-500 to-teal-400" },
-      { name: "HTML & CSS",   Icon: SiHtml5,       level: 85, iconColor: "#E34F26", bar: "from-orange-500 to-red-400" },
+      { name: "Redux",        Icon: SiRedux,      level: 80, iconColor: "#764ABC", bar: "from-purple-500 to-violet-400" },
+      { name: "JavaScript",   Icon: SiJavascript, level: 65, iconColor: "#F7DF1E", bar: "from-yellow-400 to-orange-400" },
+      { name: "Tailwind CSS", Icon: SiTailwindcss,level: 75, iconColor: "#06B6D4", bar: "from-cyan-500 to-teal-400" },
+      { name: "HTML & CSS",   Icon: SiHtml5,      level: 85, iconColor: "#E34F26", bar: "from-orange-500 to-red-400" },
     ],
   },
   {
-    label: "Backend & Tools",
+    label: "Backend",
     skills: [
-      { name: "Node.js",    Icon: SiNodedotjs, level: 50, iconColor: "#339933", bar: "from-green-500 to-emerald-400" },
-      { name: "Express.js", Icon: FaServer,    level: 55, iconColor: "#64748B", bar: "from-slate-500 to-slate-400" },
-      { name: "MongoDB",    Icon: SiMongodb,   level: 55, iconColor: "#47A248", bar: "from-green-600 to-lime-400" },
-      { name: "REST APIs",  Icon: FaDatabase,  level: 70, iconColor: "#2563EB", bar: "from-blue-500 to-indigo-400" },
-      { name: "Java",       Icon: FaCode,      level: 60, iconColor: "#EA580C", bar: "from-red-500 to-orange-400" },
+      { name: "Node.js",    Icon: SiNodedotjs,  level: 50, iconColor: "#339933", bar: "from-green-500 to-emerald-400" },
+      { name: "Express.js", Icon: FaServer,     level: 55, iconColor: "#64748B", bar: "from-slate-500 to-slate-400" },
+      { name: "Python",     Icon: SiPython,     level: 65, iconColor: "#3776AB", bar: "from-blue-500 to-yellow-400" },
+      { name: "MongoDB",    Icon: SiMongodb,    level: 55, iconColor: "#47A248", bar: "from-green-600 to-lime-400" },
+      { name: "REST APIs",  Icon: FaDatabase,   level: 70, iconColor: "#2563EB", bar: "from-blue-500 to-indigo-400" },
+      { name: "FastAPI",    Icon: SiFastapi,    level: 60, iconColor: "#009688", bar: "from-teal-500 to-emerald-400" },
+      { name: "LangChain",  Icon: SiLangchain,  level: 55, iconColor: "#1C3C3C", bar: "from-emerald-600 to-teal-400" },
+      { name: "LLMs",       Icon: FaBrain,      level: 55, iconColor: "#7C3AED", bar: "from-violet-500 to-purple-400" },
     ],
   },
   {
-    label: "AI / ML",
+    label: "Tools",
     skills: [
-      { name: "Python",    Icon: SiPython,    level: 65, iconColor: "#3776AB", bar: "from-blue-500 to-yellow-400" },
-      { name: "FastAPI",   Icon: SiFastapi,   level: 60, iconColor: "#009688", bar: "from-teal-500 to-emerald-400" },
-      { name: "LangChain", Icon: SiLangchain, level: 55, iconColor: "#1C3C3C", bar: "from-emerald-600 to-teal-400" },
-      { name: "LLMs",      Icon: FaBrain,     level: 55, iconColor: "#7C3AED", bar: "from-violet-500 to-purple-400" },
+      { name: "Git",     Icon: SiGit,    level: 75, iconColor: "#F05032", bar: "from-orange-500 to-red-400" },
+      { name: "GitHub",  Icon: SiGithub, level: 75, iconColor: "#181717", bar: "from-slate-600 to-slate-400" },
+      { name: "Cursor",  Icon: FaCode,   level: 70, iconColor: "#2563EB", bar: "from-blue-500 to-indigo-400" },
+      { name: "Claude",  Icon: FaRobot,  level: 65, iconColor: "#D97706", bar: "from-amber-500 to-orange-400" },
+      { name: "Postman", Icon: SiPostman,level: 65, iconColor: "#FF6C37", bar: "from-orange-400 to-red-400" },
     ],
   },
 ];

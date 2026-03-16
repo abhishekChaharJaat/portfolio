@@ -8,7 +8,7 @@ const workProjects = [
     name: "Inhouse AI — Website",
     url: "https://www.inhouse.ai/",
     screenshot: "/images/inhouse.png",
-    description: "The official marketing website for Inhouse AI — showcasing the product, features, pricing, and company vision. Built for performance and SEO with Next.js and Go.",
+    description: "Developed the official marketing website for Inhouse AI, highlighting the platform's product, features, pricing, and vision. Built using Next.js and Go with a strong focus on performance, SEO optimization, and fast user experience.",
     tags: ["Next.js", "Go", "Tailwind CSS"],
     highlights: [
       "Built with Next.js for fast, SEO-optimised page rendering",
@@ -21,7 +21,7 @@ const workProjects = [
     name: "Inhouse Platform — App",
     url: "https://platform.inhouse.ai/",
     screenshot: "/images/platfrom.png",
-    description: "The core product — an AI-powered legal services platform where users get instant AI-generated legal advice, draft legal documents, and consult directly with licensed attorneys.",
+    description: "Built the frontend from scratch for platform.inhouse.ai — an AI-powered legal services platform. Developed the UI for key product journeys including AI Ask, AI Draft, and attorney consultations, delivering a seamless and responsive experience for real-time legal guidance and document generation.",
     tags: ["Next.js", "React.js", "Redux", "Clerk", "AI"],
     highlights: [],
   },

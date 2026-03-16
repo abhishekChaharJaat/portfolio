@@ -4,14 +4,14 @@ const education = [
   {
     degree: "Bachelor of Computer Applications (BCA)",
     institution: "GLA University",
-    location: "Chaumuhan, Mathura, U.P.",
+    location: "Mathura, U.P.",
     period: "2022 – 2025",
     status: "Completed",
   },
   {
     degree: "Masters of Computer Applications (MCA)",
     institution: "GLA University",
-    location: "Chaumuhan, Mathura, U.P.",
+    location: "Mathura, U.P.",
     period: "2025 – 2027",
     status: "Pursuing",
   },

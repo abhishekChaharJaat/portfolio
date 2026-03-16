@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { FaGithub, FaLinkedin, FaArrowRight, FaDownload } from "react-icons/fa";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaArrowRight,
+  FaDownload,
+  FaBriefcase,
+  FaCalendarAlt,
+} from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import Image from "next/image";
 
 const Home = () => {
@@ -37,7 +45,7 @@ const Home = () => {
       nodes.forEach((n) => {
         n.x += n.vx;
         n.y += n.vy;
-        if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
         if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
       });
 
@@ -79,7 +87,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative flex items-center justify-center min-h-screen bg-white px-6 scroll-mt-20 overflow-hidden"
+      className="relative bg-white scroll-mt-20 overflow-hidden"
     >
       {/* Neural network canvas */}
       <canvas
@@ -87,11 +95,10 @@ const Home = () => {
         className="absolute inset-0 w-full h-full pointer-events-none"
       />
 
-      <div className="relative max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20 w-full py-32 z-10">
-
-        {/* ── Left: Text ── */}
+      {/* ── Hero ── */}
+      <div className="relative max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20 w-full px-6 min-h-screen py-32 z-10">
+        {/* Left: Text */}
         <div className="flex-1 text-center md:text-left">
-
           {/* Role badge */}
           <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-[#2563EB] text-xs font-bold px-4 py-1.5 rounded-full mb-6 mx-auto md:mx-0">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
@@ -107,23 +114,36 @@ const Home = () => {
           </h1>
 
           {/* Bio */}
-          <p className="text-base text-slate-500 leading-relaxed mb-8 max-w-lg mx-auto md:mx-0">
-            I build fast, scalable web apps with{" "}
+          <p className="text-base text-slate-500 leading-relaxed mb-4 max-w-lg mx-auto md:mx-0">
+            I&apos;m a{" "}
+            <span className="font-semibold text-[#0F172A]">
+              Software Engineer
+            </span>{" "}
+            passionate about crafting fast, accessible, and visually polished
+            web experiences. I work with{" "}
             <span className="font-semibold text-[#0F172A]">React.js</span>,{" "}
-            <span className="font-semibold text-[#0F172A]">Next.js</span> &amp;{" "}
-            <span className="font-semibold text-[#0F172A]">Node.js</span> — and
-            work with{" "}
-            <span className="font-semibold text-[#0F172A]">LLMs</span>,{" "}
-            <span className="font-semibold text-[#0F172A]">LangChain</span> &amp;{" "}
-            <span className="font-semibold text-[#0F172A]">FastAPI</span> to
-            build intelligent AI-powered products.
+            <span className="font-semibold text-[#0F172A]">Next.js</span>,{" "}
+            <span className="font-semibold text-[#0F172A]">Redux</span>, and{" "}
+            <span className="font-semibold text-[#0F172A]">Tailwind CSS</span> —
+            turning complex requirements into clean, maintainable UIs.
+          </p>
+
+          <p className="text-base text-slate-500 leading-relaxed mb-8 max-w-lg mx-auto md:mx-0">
+            On the backend I build reliable APIs with{" "}
+            <span className="font-semibold text-[#0F172A]">Node.js</span>,{" "}
+            <span className="font-semibold text-[#0F172A]">Python</span> &amp;{" "}
+            <span className="font-semibold text-[#0F172A]">MongoDB</span>, and
+            work with <span className="font-semibold text-[#0F172A]">LLMs</span>
+            , <span className="font-semibold text-[#0F172A]">LangChain</span>{" "}
+            &amp; <span className="font-semibold text-[#0F172A]">FastAPI</span>{" "}
+            to build intelligent AI-powered products.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-8">
             <a
               href="#projects"
-              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg shadow-blue-200 text-sm"
+              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-6 py-3 rounded-full font-semibold transition-all duration-200 shadow-lg shadow-blue-200 text-sm"
             >
               View My Work <FaArrowRight size={12} />
             </a>
@@ -131,7 +151,7 @@ const Home = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-slate-200 text-slate-400 hover:border-slate-300 hover:text-slate-600 bg-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 text-sm"
+              className="inline-flex items-center gap-2 border border-slate-200 text-slate-400 hover:border-slate-300 hover:text-slate-600 bg-white px-6 py-3 rounded-full font-semibold transition-all duration-200 text-sm"
             >
               <FaDownload size={12} /> Resume
             </a>
@@ -142,10 +162,25 @@ const Home = () => {
 
           {/* Social links */}
           <div className="flex justify-center md:justify-start items-center gap-3">
-            <span className="text-xs text-slate-400 font-medium">Find me on</span>
+            <span className="text-xs text-slate-400 font-medium">
+              Find me on
+            </span>
             {[
-              { href: "https://github.com/abhishekChaharJaat",       Icon: FaGithub,   label: "GitHub" },
-              { href: "http://linkedin.com/in/abhishek-chahar-jaat", Icon: FaLinkedin, label: "LinkedIn" },
+              {
+                href: "https://github.com/abhishekChaharJaat",
+                Icon: FaGithub,
+                label: "GitHub",
+              },
+              {
+                href: "http://linkedin.com/in/abhishek-chahar-jaat",
+                Icon: FaLinkedin,
+                label: "LinkedIn",
+              },
+              {
+                href: "https://leetcode.com/u/abhishekchahar200",
+                Icon: SiLeetcode,
+                label: "LeetCode",
+              },
             ].map(({ href, Icon, label }) => (
               <a
                 key={label}
@@ -161,15 +196,13 @@ const Home = () => {
           </div>
         </div>
 
-        {/* ── Right: Image ── */}
-        <div className="shrink-0 relative flex items-center justify-center">
-          {/* Soft glow behind image */}
+        {/* Right: Image */}
+        <div className="shrink-0 relative flex flex-col items-center gap-6">
+          {/* Soft glow */}
           <div className="absolute w-72 h-72 rounded-full bg-blue-100 opacity-40 blur-3xl" />
 
           {/* Circular image */}
-          <div
-            className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-4 ring-blue-100 z-10"
-          >
+          <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-4 ring-blue-100 z-10">
             <Image
               src="/images/me3.jpg"
               alt="Abhishek Chahar"
@@ -178,8 +211,35 @@ const Home = () => {
               priority
             />
           </div>
-        </div>
 
+          {/* Current Role card — pinned below photo */}
+          <div className="relative z-10 bg-white rounded-2xl px-5 py-4 border border-slate-200 shadow-md w-full max-w-[260px]">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-6 h-6 rounded-lg bg-blue-50 flex items-center justify-center">
+                <FaBriefcase className="text-[#2563EB]" size={11} />
+              </div>
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                Current Role
+              </span>
+            </div>
+            <p className="font-bold text-[#0F172A] text-sm leading-snug">
+              Inhouse AI Inc.
+            </p>
+            <p className="text-slate-500 text-xs mt-0.5">
+              Frontend Engineer · Full-time
+            </p>
+            <div className="flex items-center gap-1.5 mt-1.5">
+              <FaCalendarAlt className="text-slate-400" size={10} />
+              <p className="text-slate-400 text-[11px]">Dec 2024 – Present</p>
+            </div>
+            <div className="mt-2 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-[11px] text-green-600 font-medium">
+                Active
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Scroll indicator */}
@@ -187,7 +247,9 @@ const Home = () => {
         <div className="w-4 h-7 rounded-full border-2 border-slate-400 flex items-start justify-center pt-1">
           <div className="w-0.5 h-1.5 rounded-full bg-slate-400 animate-bounce" />
         </div>
-        <span className="text-[9px] text-slate-400 font-medium tracking-widest uppercase">Scroll</span>
+        <span className="text-[9px] text-slate-400 font-medium tracking-widest uppercase">
+          Scroll
+        </span>
       </div>
     </section>
   );
