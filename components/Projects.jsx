@@ -1,5 +1,10 @@
 import React from "react";
-import { FaExternalLinkAlt, FaShoppingCart, FaComments, FaTasks } from "react-icons/fa";
+import {
+  FaExternalLinkAlt,
+  FaShoppingCart,
+  FaComments,
+  FaTasks,
+} from "react-icons/fa";
 
 const projects = [
   {
@@ -10,7 +15,14 @@ const projects = [
     projectUrl: "https://abhishekshopshare.netlify.app/",
     gradient: "from-emerald-500 via-teal-500 to-cyan-600",
     Icon: FaShoppingCart,
-    techStack: ["React", "Redux", "Tailwind", "Node.js", "Express.js", "MongoDB"],
+    techStack: [
+      "React",
+      "Redux",
+      "Tailwind",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+    ],
   },
   {
     name: "Chat App",
@@ -20,7 +32,15 @@ const projects = [
     projectUrl: "https://abhishekschatapp.netlify.app/home",
     gradient: "from-violet-500 via-purple-500 to-indigo-600",
     Icon: FaComments,
-    techStack: ["React", "Redux", "Tailwind", "Clerk", "Node.js", "Express.js", "MongoDB"],
+    techStack: [
+      "React",
+      "Redux",
+      "Tailwind",
+      "Clerk",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+    ],
   },
   {
     name: "Task Manager",
@@ -30,7 +50,14 @@ const projects = [
     projectUrl: "https://abhishektaskmanager.netlify.app/",
     gradient: "from-orange-400 via-amber-500 to-yellow-500",
     Icon: FaTasks,
-    techStack: ["React", "Redux", "Tailwind", "Node.js", "Express.js", "MongoDB"],
+    techStack: [
+      "React",
+      "Redux",
+      "Tailwind",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+    ],
   },
 ];
 
@@ -72,7 +99,7 @@ const Projects = () => {
 
                 {/* Project Preview Mockup */}
                 <div
-                  className={`h-44 bg-gradient-to-br ${project.gradient} flex flex-col items-center justify-center overflow-hidden relative`}
+                  className={`h-44 bg-linear-to-br ${project.gradient} flex flex-col items-center justify-center overflow-hidden relative`}
                 >
                   {/* Decorative UI lines */}
                   <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -89,7 +116,9 @@ const Projects = () => {
                   <p className="text-white font-bold text-lg drop-shadow">
                     {project.name}
                   </p>
-                  <p className="text-white/70 text-xs mt-1">{project.subtitle}</p>
+                  <p className="text-white/70 text-xs mt-1">
+                    {project.subtitle}
+                  </p>
                 </div>
 
                 {/* Card Content */}

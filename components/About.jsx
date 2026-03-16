@@ -18,7 +18,10 @@ const stats = [
 const highlights = [
   { icon: FaCode, text: "Modern UI with React, Redux & Tailwind CSS" },
   { icon: FaPlug, text: "RESTful API integration & data-driven UIs" },
-  { icon: FaLayerGroup, text: "Complex state management & component architecture" },
+  {
+    icon: FaLayerGroup,
+    text: "Complex state management & component architecture",
+  },
   { icon: FaServer, text: "Backend with Node.js, Express & MongoDB" },
 ];
 
@@ -37,14 +40,18 @@ const About = () => {
           <div className="lg:col-span-2 space-y-5" data-aos="fade-right">
             <p className="text-[17px] leading-relaxed text-[#4a5568]">
               I am a{" "}
-              <span className="font-semibold text-[#13866F]">Software Engineer</span>{" "}
+              <span className="font-semibold text-[#13866F]">
+                Software Engineer
+              </span>{" "}
               specializing in{" "}
-              <span className="font-semibold text-[#13866F]">Frontend Development</span>{" "}
+              <span className="font-semibold text-[#13866F]">
+                Frontend Development
+              </span>{" "}
               who builds scalable, high-performance web interfaces using{" "}
               <span className="font-semibold text-[#13866F]">React.js</span>,{" "}
               <span className="font-semibold text-[#13866F]">Redux</span>, and{" "}
-              <span className="font-semibold text-[#13866F]">Tailwind CSS</span>.
-              I focus on writing clean, reusable code with strong attention to
+              <span className="font-semibold text-[#13866F]">Tailwind CSS</span>
+              . I focus on writing clean, reusable code with strong attention to
               responsiveness, accessibility, and performance.
             </p>
 
@@ -55,15 +62,15 @@ const About = () => {
               <span className="font-semibold text-[#13866F]">RESTful APIs</span>{" "}
               and authentication with{" "}
               <span className="font-semibold text-[#13866F]">Clerk</span> to
-              create interactive, data-driven user experiences and manage complex
-              state effectively.
+              create interactive, data-driven user experiences and manage
+              complex state effectively.
             </p>
 
             <p className="text-[17px] leading-relaxed text-[#4a5568]">
               I also have solid backend experience with{" "}
               <span className="font-semibold text-[#13866F]">Node.js</span>,{" "}
-              <span className="font-semibold text-[#13866F]">Express.js</span>, and{" "}
-              <span className="font-semibold text-[#13866F]">MongoDB</span>,
+              <span className="font-semibold text-[#13866F]">Express.js</span>,
+              and <span className="font-semibold text-[#13866F]">MongoDB</span>,
               having built several full-stack projects that demonstrate both
               efficient API development and scalable state management.
             </p>
@@ -82,7 +89,7 @@ const About = () => {
                     data-aos-delay={i * 80}
                   >
                     <Icon
-                      className="text-[#13866F] mt-0.5 flex-shrink-0"
+                      className="text-[#13866F] mt-0.5 shrink-0"
                       size={15}
                     />
                     <span className="text-sm text-[#4a5568] leading-relaxed">
@@ -101,7 +108,7 @@ const About = () => {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-gradient-to-br from-[#F0FAF7] to-[#E6F5F0] rounded-xl p-5 text-center border border-[#D0EDE6] hover:shadow-md transition"
+                  className="bg-linear-to-br from-[#F0FAF7] to-[#E6F5F0] rounded-xl p-5 text-center border border-[#D0EDE6] hover:shadow-md transition"
                   data-aos="zoom-in"
                   data-aos-delay={i * 80}
                 >
@@ -138,7 +145,7 @@ const About = () => {
               className="flex items-center gap-3 bg-[#E0F5EF] rounded-xl p-4 border border-[#B3E5D8]"
               data-aos="fade-up"
             >
-              <FaRocket className="text-[#13866F] flex-shrink-0" size={18} />
+              <FaRocket className="text-[#13866F] shrink-0" size={18} />
               <div>
                 <p className="text-sm font-semibold text-[#13866F]">
                   Open to Opportunities
