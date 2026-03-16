@@ -33,3 +33,53 @@ body {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-12px); }
 }
+
+/* ── Page loader (CSS-driven, no hydration delay) ── */
+#page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #0F172A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: loaderOut 0.4s ease forwards 1.9s;
+  pointer-events: none;
+}
+@keyframes loaderOut {
+  to { opacity: 0; }
+}
+
+#page-loader .ldr-monogram {
+  opacity: 0;
+  transform: scale(0.75);
+  animation: ldrScaleIn 0.5s ease forwards 0.05s;
+}
+#page-loader .ldr-ring {
+  animation: spin 1s linear infinite;
+}
+#page-loader .ldr-name {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: ldrSlideUp 0.45s ease forwards 0.15s;
+}
+#page-loader .ldr-role {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: ldrSlideUp 0.45s ease forwards 0.25s;
+}
+#page-loader .ldr-bar-fill {
+  width: 0;
+  animation: ldrBarFill 0.95s ease forwards 0.75s;
+}
+
+@keyframes ldrScaleIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes ldrSlideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ldrBarFill {
+  to { width: 100%; }
+}

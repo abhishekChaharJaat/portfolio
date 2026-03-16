@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FaUniversity, FaMapMarkerAlt, FaCheckCircle, FaCalendarAlt, FaSpinner } from "react-icons/fa";
 
 const education = [
@@ -88,6 +89,21 @@ const Education = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* GLAdiators banner */}
+        <div
+          className="relative w-full rounded-2xl overflow-hidden mt-8"
+          style={{ boxShadow: "0 0 0 2px #bfdbfe, 0 0 12px 4px #2563eb40" }}
+          data-aos="fade-up"
+        >
+          <Image
+            src="/gallery/gla-star.jpeg"
+            alt="Our Shining GLAdiators — GLA University"
+            width={1280}
+            height={480}
+            className="w-full h-auto brightness-110"
+          />
         </div>
 
       </div>
