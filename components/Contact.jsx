@@ -30,136 +30,150 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="min-h-screen bg-gradient-to-br from-[#FFFFFF] via-[#FBFFFE] to-[#F4FFFC] text-[#2A3B4F] px-6 py-16 scroll-mt-20"
-      data-aos="fade-up"
-    >
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold mb-8 text-center text-[#394045]">
-          Get in Touch
-        </h2>
-        <p className="text-center mb-12 text-lg text-[#496D75]">
-          I&apos;d love to hear from you! Whether you have a project, a
-          question, or just want to say hi, feel free to reach out using the
-          form below or via my social links.
-        </p>
+    <section id="contact" className="py-20 bg-[#F8FFFE] scroll-mt-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-14" data-aos="fade-up">
+          <h2 className="text-4xl font-bold text-[#1B2B48]">Get in Touch</h2>
+          <div className="mx-auto mt-3 h-1 w-16 bg-[#13866F] rounded-full" />
+          <p className="mt-4 text-[#5a7a82] text-base max-w-lg mx-auto">
+            Whether you have a project, a question, or just want to say hi —
+            I&apos;d love to hear from you.
+          </p>
+        </div>
 
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="grid md:grid-cols-2 gap-10 items-start">
           {/* Contact Info */}
-          <div className="md:w-1/2 space-y-8">
-            <div className="flex items-center gap-4">
-              <FaPhoneAlt className="text-[#3CA68D] text-xl" />
+          <div className="space-y-6" data-aos="fade-right">
+            <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+              <div className="w-10 h-10 rounded-lg bg-[#E8F5F0] flex items-center justify-center shrink-0">
+                <FaPhoneAlt className="text-[#13866F]" size={16} />
+              </div>
               <a
                 href="tel:+917895048246"
-                className="text-lg font-medium hover:underline"
-                aria-label="Call phone number"
+                className="text-[#1B2B48] font-medium hover:text-[#13866F] transition"
               >
                 +91 78950 48246
               </a>
             </div>
 
-            <div className="flex items-center gap-4">
-              <FaEnvelope className="text-[#3CA68D] text-xl" />
+            <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+              <div className="w-10 h-10 rounded-lg bg-[#E8F5F0] flex items-center justify-center shrink-0">
+                <FaEnvelope className="text-[#13866F]" size={16} />
+              </div>
               <a
                 href="mailto:abhishekchahar200@gmail.com"
-                className="text-lg font-medium hover:underline"
-                aria-label="Send email"
+                className="text-[#1B2B48] font-medium hover:text-[#13866F] transition break-all"
               >
                 abhishekchahar200@gmail.com
               </a>
             </div>
 
-            <div className="flex items-center gap-4">
-              <FaMapMarkerAlt className="text-[#3CA68D] text-xl" />
-              <span className="text-lg font-medium">Mathura, U.P., India</span>
+            <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition">
+              <div className="w-10 h-10 rounded-lg bg-[#E8F5F0] flex items-center justify-center shrink-0">
+                <FaMapMarkerAlt className="text-[#13866F]" size={16} />
+              </div>
+              <span className="text-[#1B2B48] font-medium">
+                Mathura, U.P., India
+              </span>
             </div>
 
-            <div className="flex space-x-6 mt-8 text-2xl text-[#3CA68D]">
-              <a
-                href="https://github.com/abhishekChaharJaat"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#2B6652] transition-colors"
-                aria-label="GitHub"
-              >
-                <FaGithub />
-              </a>
-              <a
-                href="https://linkedin.com/in/abhishek-chahar-jaat"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#2B6652] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
-              </a>
-              <a
-                href="https://twitter.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#2B6652] transition-colors"
-                aria-label="Twitter"
-              >
-                <FaTwitter />
-              </a>
+            {/* Social Links */}
+            <div className="flex gap-3 pt-2">
+              {[
+                {
+                  href: "https://github.com/abhishekChaharJaat",
+                  icon: FaGithub,
+                  label: "GitHub",
+                },
+                {
+                  href: "https://linkedin.com/in/abhishek-chahar-jaat",
+                  icon: FaLinkedin,
+                  label: "LinkedIn",
+                },
+                {
+                  href: "https://twitter.com/yourusername",
+                  icon: FaTwitter,
+                  label: "Twitter",
+                },
+              ].map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white border border-gray-200 text-[#394045] hover:bg-[#13866F] hover:text-white hover:border-[#13866F] transition-all duration-200 shadow-sm"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Contact Form */}
           <form
             onSubmit={handleSubmit}
-            className="md:w-1/2 bg-[#FAFEFD] rounded-lg p-8 shadow-lg"
+            className="bg-white rounded-2xl p-8 shadow-md border border-gray-100"
             noValidate
+            data-aos="fade-left"
           >
             {submitted && (
-              <p className="mb-6 text-green-600 font-semibold">
+              <div className="mb-5 p-3 bg-[#E0F5EF] text-[#13866F] rounded-lg text-sm font-medium border border-[#B3E5D8]">
                 Thank you! Your message has been sent.
-              </p>
+              </div>
             )}
 
-            <label className="block mb-4">
-              <span className="text-[#394045] font-medium mb-1 block">Name</span>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3CA68D]"
-                placeholder="Your name"
-              />
-            </label>
+            <div className="space-y-4">
+              <label className="block">
+                <span className="text-[#1B2B48] text-sm font-semibold mb-1.5 block">
+                  Name
+                </span>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#13866F]/40 focus:border-[#13866F] transition"
+                  placeholder="Your name"
+                />
+              </label>
 
-            <label className="block mb-4">
-              <span className="text-[#394045] font-medium mb-1 block">Email</span>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3CA68D]"
-                placeholder="Your email address"
-              />
-            </label>
+              <label className="block">
+                <span className="text-[#1B2B48] text-sm font-semibold mb-1.5 block">
+                  Email
+                </span>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#13866F]/40 focus:border-[#13866F] transition"
+                  placeholder="Your email address"
+                />
+              </label>
 
-            <label className="block mb-6">
-              <span className="text-[#394045] font-medium mb-1 block">Message</span>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                rows={5}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-[#3CA68D]"
-                placeholder="Write your message here..."
-              ></textarea>
-            </label>
+              <label className="block">
+                <span className="text-[#1B2B48] text-sm font-semibold mb-1.5 block">
+                  Message
+                </span>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:ring-2 focus:ring-[#13866F]/40 focus:border-[#13866F] transition"
+                  placeholder="Write your message here..."
+                />
+              </label>
+            </div>
 
             <button
               type="submit"
-              className="w-full bg-[#3CA68D] hover:bg-[#2B6652] text-white font-semibold py-3 rounded-md transition-colors duration-300"
+              className="mt-5 w-full bg-[#13866F] hover:bg-[#0f5a4c] text-white font-semibold py-3 rounded-lg transition-colors duration-300 shadow-sm text-sm"
             >
               Send Message
             </button>

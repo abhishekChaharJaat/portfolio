@@ -1,40 +1,50 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaHeart } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-900 text-gray-400 py-12 px-8">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm">
+    <footer className="bg-[#0f1923] text-gray-400 py-10 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="text-center md:text-left">
+          <p className="text-white font-semibold text-base">Abhishek Chahar</p>
+          <p className="text-sm mt-1 flex items-center justify-center md:justify-start gap-1">
+            Built with{" "}
+            <FaHeart className="text-[#13866F]" size={12} />
+            {" "}using Next.js &amp; Tailwind CSS
+          </p>
+        </div>
+
+        <p className="text-xs text-gray-500">
           &copy; {new Date().getFullYear()} Abhishek Chahar. All rights reserved.
         </p>
-        <div className="flex space-x-6 mt-4 md:mt-0 text-xl text-gray-400">
+
+        <div className="flex gap-3">
           <a
             href="https://github.com/abhishekChaharJaat"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-gray-200 transition"
             aria-label="GitHub"
+            className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 hover:bg-[#13866F] text-gray-400 hover:text-white transition-all duration-200"
           >
-            <FaGithub />
+            <FaGithub size={16} />
           </a>
           <a
             href="https://linkedin.com/in/abhishek-chahar-jaat"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-500 transition"
             aria-label="LinkedIn"
+            className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 hover:bg-[#13866F] text-gray-400 hover:text-white transition-all duration-200"
           >
-            <FaLinkedin />
+            <FaLinkedin size={16} />
           </a>
           <a
             href="https://twitter.com/yourusername"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-cyan-400 transition"
             aria-label="Twitter"
+            className="w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 hover:bg-[#13866F] text-gray-400 hover:text-white transition-all duration-200"
           >
-            <FaTwitter />
+            <FaTwitter size={16} />
           </a>
         </div>
       </div>
