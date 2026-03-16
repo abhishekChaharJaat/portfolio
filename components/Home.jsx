@@ -114,7 +114,7 @@ const Home = () => {
           </div>
 
           {/* Current Role card */}
-          <div className="relative z-10 bg-white rounded-xl px-4 py-3 border border-slate-200 shadow-md w-full max-w-xs md:max-w-[260px]">
+          <div className="relative z-10 bg-white rounded-xl px-4 py-3 border border-slate-200 shadow-md w-full max-w-xs md:max-w-65">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 rounded-md bg-blue-50 flex items-center justify-center">

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const navItems = [
-  { name: "About", href: "#about" },
+  { name: "Home", href: "#home" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
@@ -16,11 +16,27 @@ const navItems = [
 const Topnav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const ids = navItems.map((n) => n.href.replace("#", ""));
+    const observers = ids.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
   return (
@@ -46,10 +62,16 @@ const Topnav = () => {
             <a
               key={item.name}
               href={item.href}
-              className="relative text-blue-100 hover:text-white px-3 py-2 rounded-md transition-colors duration-200 group"
+              className={`relative px-3 py-2 rounded-md transition-colors duration-200 group ${
+                activeSection === item.href.replace("#", "")
+                  ? "text-white font-semibold"
+                  : "text-blue-100 hover:text-white"
+              }`}
             >
               {item.name}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px w-0 bg-white group-hover:w-3/4 transition-all duration-300 rounded-full" />
+              <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-px bg-white transition-all duration-300 rounded-full ${
+                activeSection === item.href.replace("#", "") ? "w-3/4" : "w-0 group-hover:w-3/4"
+              }`} />
             </a>
           ))}
         </nav>
@@ -79,7 +101,11 @@ const Topnav = () => {
             <a
               key={item.name}
               href={item.href}
-              className="block text-slate-600 hover:text-[#2563EB] hover:bg-blue-50 px-3 py-2.5 rounded-lg transition text-sm font-medium"
+              className={`block px-3 py-2.5 rounded-lg transition text-sm font-medium ${
+                activeSection === item.href.replace("#", "")
+                  ? "text-[#2563EB] bg-blue-50 font-semibold"
+                  : "text-slate-600 hover:text-[#2563EB] hover:bg-blue-50"
+              }`}
               onClick={() => setIsOpen(false)}
             >
               {item.name}

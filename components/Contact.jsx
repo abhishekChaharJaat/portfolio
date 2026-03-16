@@ -1,30 +1,50 @@
 "use client";
 
-import { useState } from "react";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaCheckCircle } from "react-icons/fa";
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 
 const contactInfo = [
-  { icon: FaPhoneAlt,    label: "Phone",    value: "+91 78950 48246",                href: "tel:+917895048246" },
-  { icon: FaEnvelope,    label: "Email",    value: "abhishekchahar200@gmail.com",     href: "mailto:abhishekchahar200@gmail.com" },
-  { icon: FaMapMarkerAlt,label: "Location", value: "Mathura, U.P., India",           href: null },
+  { icon: FaPhoneAlt,     label: "Phone",    value: "+91 78950 48246",              href: "tel:+917895048246" },
+  { icon: FaEnvelope,     label: "Email",    value: "abhishekchahar200@gmail.com",   href: "mailto:abhishekchahar200@gmail.com" },
+  { icon: FaMapMarkerAlt, label: "Location", value: "Mathura, U.P., India",          href: null },
 ];
 
 const socials = [
-  { href: "https://github.com/abhishekChaharJaat",         Icon: FaGithub,   label: "GitHub" },
-  { href: "https://linkedin.com/in/abhishek-chahar-jaat",  Icon: FaLinkedin, label: "LinkedIn" },
+  { href: "https://github.com/abhishekChaharJaat",        Icon: FaGithub,   label: "GitHub" },
+  { href: "https://linkedin.com/in/abhishek-chahar-jaat", Icon: FaLinkedin, label: "LinkedIn" },
+  { href: "https://leetcode.com/u/abhishekchahar200",     Icon: SiLeetcode, label: "LeetCode" },
 ];
 
+// Replace these with your EmailJS credentials
+const EMAILJS_SERVICE_ID  = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY  = "YOUR_PUBLIC_KEY";
+
 const Contact = () => {
+  const formRef = useRef(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState(null); // "sending" | "success" | "error"
 
   const handleChange = (e) =>
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
+    setStatus("sending");
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus("success");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -41,14 +61,13 @@ const Contact = () => {
           </h2>
           <div className="mx-auto mt-3 h-1 w-12 bg-[#2563EB] rounded-full" />
           <p className="mt-4 text-slate-500 text-base max-w-md mx-auto">
-            Have a project in mind or just want to say hi? I&apos;d love to hear
-            from you.
+            Have a project in mind or just want to say hi? I&apos;d love to hear from you.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-10 items-start">
 
-          {/* ── Contact Info ── */}
+          {/* Contact Info */}
           <div className="space-y-4" data-aos="fade-right">
             {contactInfo.map(({ icon: Icon, label, value, href }) => (
               <div
@@ -83,27 +102,31 @@ const Contact = () => {
                 </a>
               ))}
             </div>
-
           </div>
 
-          {/* ── Form ── */}
+          {/* Form */}
           <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="bg-white border border-slate-200 rounded-2xl p-7 shadow-sm"
             noValidate
             data-aos="fade-left"
           >
-            {sent && (
+            {status === "success" && (
               <div className="mb-5 flex items-center gap-2 bg-blue-50 border border-blue-100 text-[#2563EB] rounded-xl px-4 py-3 text-sm font-semibold">
-                <FaCheckCircle size={15} />
-                Thank you! Your message has been sent.
+                <FaCheckCircle size={15} /> Message sent successfully!
+              </div>
+            )}
+            {status === "error" && (
+              <div className="mb-5 flex items-center gap-2 bg-red-50 border border-red-100 text-red-600 rounded-xl px-4 py-3 text-sm font-semibold">
+                <FaExclamationCircle size={15} /> Something went wrong. Please try again.
               </div>
             )}
 
             <div className="space-y-4">
               {[
-                { label: "Name",    name: "name",    type: "text",  placeholder: "Your full name" },
-                { label: "Email",   name: "email",   type: "email", placeholder: "your@email.com" },
+                { label: "Name",  name: "name",  type: "text",  placeholder: "Your full name" },
+                { label: "Email", name: "email", type: "email", placeholder: "your@email.com" },
               ].map(({ label, name, type, placeholder }) => (
                 <label key={name} className="block">
                   <span className="text-xs font-bold text-[#0F172A] uppercase tracking-wider mb-1.5 block">
@@ -139,9 +162,10 @@ const Contact = () => {
 
             <button
               type="submit"
-              className="mt-5 w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold py-3 rounded-xl transition shadow-sm shadow-blue-200 text-sm"
+              disabled={status === "sending"}
+              className="mt-5 w-full bg-[#2563EB] hover:bg-[#1D4ED8] disabled:opacity-60 text-white font-bold py-3 rounded-xl transition shadow-sm shadow-blue-200 text-sm"
             >
-              Send Message
+              {status === "sending" ? "Sending…" : "Send Message"}
             </button>
           </form>
         </div>
