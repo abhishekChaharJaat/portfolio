@@ -57,7 +57,11 @@ const Topnav = () => {
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white p-2 rounded-md hover:bg-blue-500 transition"
+          className={`md:hidden p-2 rounded-md transition ${
+            isOpen
+              ? "bg-white text-[#2563EB]"
+              : "text-white hover:bg-blue-500"
+          }`}
           aria-label="Toggle menu"
         >
           {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
@@ -66,7 +70,7 @@ const Topnav = () => {
 
       {/* Mobile Dropdown */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 bg-[#2563EB] border-t border-blue-400 ${
+        className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-slate-100 shadow-lg ${
           isOpen ? "max-h-96" : "max-h-0"
         }`}
       >
@@ -75,7 +79,7 @@ const Topnav = () => {
             <a
               key={item.name}
               href={item.href}
-              className="block text-blue-100 hover:text-white hover:bg-blue-500 px-3 py-2.5 rounded-lg transition text-sm font-medium"
+              className="block text-slate-600 hover:text-[#2563EB] hover:bg-blue-50 px-3 py-2.5 rounded-lg transition text-sm font-medium"
               onClick={() => setIsOpen(false)}
             >
               {item.name}

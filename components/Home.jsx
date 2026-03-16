@@ -28,7 +28,7 @@ const Home = () => {
     resize();
     window.addEventListener("resize", resize);
 
-    const NODES = 55;
+    const NODES = canvas.width < 640 ? 20 : 55;
     const MAX_DIST = 140;
 
     const nodes = Array.from({ length: NODES }, () => ({
@@ -59,7 +59,7 @@ const Home = () => {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+            ctx.strokeStyle = `rgba(180, 60, 5, ${alpha * 2})`;
             ctx.lineWidth = 0.7;
             ctx.stroke();
           }
@@ -69,7 +69,7 @@ const Home = () => {
       nodes.forEach((n) => {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(37, 99, 235, 0.45)";
+        ctx.fillStyle = "rgba(180, 60, 5, 0.75)";
         ctx.fill();
       });
 
@@ -96,9 +96,55 @@ const Home = () => {
       />
 
       {/* ── Hero ── */}
-      <div className="relative max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20 w-full px-6 min-h-screen py-32 z-10">
-        {/* Left: Text */}
-        <div className="flex-1 text-center md:text-left">
+      <div className="relative max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 lg:gap-20 w-full px-6 min-h-screen py-32 z-10">
+        {/* Top on mobile / Right on desktop: Image + Card */}
+        <div className="shrink-0 relative flex flex-col items-center gap-4 md:order-2">
+          {/* Soft glow */}
+          <div className="absolute w-48 h-48 sm:w-72 sm:h-72 rounded-full bg-blue-100 opacity-40 blur-3xl" />
+
+          {/* Circular image */}
+          <div className="relative w-32 h-32 sm:w-48 sm:h-48 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-4 ring-blue-100 z-10">
+            <Image
+              src="/images/me3.jpg"
+              alt="Abhishek Chahar"
+              fill
+              className="object-cover object-top"
+              priority
+            />
+          </div>
+
+          {/* Current Role card */}
+          <div className="relative z-10 bg-white rounded-xl px-4 py-3 border border-slate-200 shadow-md w-full max-w-xs md:max-w-[260px]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 rounded-md bg-blue-50 flex items-center justify-center">
+                  <FaBriefcase className="text-[#2563EB]" size={9} />
+                </div>
+                <div>
+                  <p className="font-bold text-[#0F172A] text-xs leading-snug">
+                    Inhouse AI Inc.
+                  </p>
+                  <p className="text-slate-500 text-[10px]">
+                    Frontend Engineer · Full-time
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-[10px] text-green-600 font-medium">
+                  Active
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 mt-2">
+              <FaCalendarAlt className="text-slate-400" size={9} />
+              <p className="text-slate-400 text-[10px]">Dec 2024 – Present</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom on mobile / Left on desktop: Text */}
+        <div className="flex-1 text-center md:text-left md:order-1">
           {/* Role badge */}
           <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-[#2563EB] text-xs font-bold px-4 py-1.5 rounded-full mb-6 mx-auto md:mx-0">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
@@ -108,13 +154,13 @@ const Home = () => {
           {/* Heading */}
           <h1
             style={{ fontFamily: "'Lora', serif", fontWeight: 700 }}
-            className="text-3xl sm:text-4xl lg:text-5xl leading-[1.15] text-[#0F172A] mb-5"
+            className="text-2xl sm:text-4xl lg:text-5xl leading-[1.15] text-[#0F172A] mb-5"
           >
             <span className="text-[#0F172A] italic">Abhishek Chahar</span>
           </h1>
 
           {/* Bio */}
-          <p className="text-base text-slate-500 leading-relaxed mb-4 max-w-lg mx-auto md:mx-0">
+          <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-4 max-w-lg mx-auto md:mx-0">
             I&apos;m a{" "}
             <span className="font-semibold text-[#0F172A]">
               Software Engineer
@@ -128,7 +174,7 @@ const Home = () => {
             turning complex requirements into clean, maintainable UIs.
           </p>
 
-          <p className="text-base text-slate-500 leading-relaxed mb-8 max-w-lg mx-auto md:mx-0">
+          <p className="text-sm sm:text-base text-slate-500 leading-relaxed mb-8 max-w-lg mx-auto md:mx-0">
             On the backend I build reliable APIs with{" "}
             <span className="font-semibold text-[#0F172A]">Node.js</span>,{" "}
             <span className="font-semibold text-[#0F172A]">Python</span> &amp;{" "}
@@ -193,51 +239,6 @@ const Home = () => {
                 <Icon size={15} />
               </a>
             ))}
-          </div>
-        </div>
-
-        {/* Right: Image */}
-        <div className="shrink-0 relative flex flex-col items-center gap-6">
-          {/* Soft glow */}
-          <div className="absolute w-72 h-72 rounded-full bg-blue-100 opacity-40 blur-3xl" />
-
-          {/* Circular image */}
-          <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-4 ring-blue-100 z-10">
-            <Image
-              src="/images/me3.jpg"
-              alt="Abhishek Chahar"
-              fill
-              className="object-cover object-top"
-              priority
-            />
-          </div>
-
-          {/* Current Role card — pinned below photo */}
-          <div className="relative z-10 bg-white rounded-2xl px-5 py-4 border border-slate-200 shadow-md w-full max-w-[260px]">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-6 h-6 rounded-lg bg-blue-50 flex items-center justify-center">
-                <FaBriefcase className="text-[#2563EB]" size={11} />
-              </div>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                Current Role
-              </span>
-            </div>
-            <p className="font-bold text-[#0F172A] text-sm leading-snug">
-              Inhouse AI Inc.
-            </p>
-            <p className="text-slate-500 text-xs mt-0.5">
-              Frontend Engineer · Full-time
-            </p>
-            <div className="flex items-center gap-1.5 mt-1.5">
-              <FaCalendarAlt className="text-slate-400" size={10} />
-              <p className="text-slate-400 text-[11px]">Dec 2024 – Present</p>
-            </div>
-            <div className="mt-2 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              <span className="text-[11px] text-green-600 font-medium">
-                Active
-              </span>
-            </div>
           </div>
         </div>
       </div>
