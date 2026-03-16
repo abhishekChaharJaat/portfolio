@@ -59,8 +59,8 @@ const Home = () => {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(180, 60, 5, ${alpha * 2})`;
-            ctx.lineWidth = 0.7;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha * 0.6})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
@@ -69,7 +69,7 @@ const Home = () => {
       nodes.forEach((n) => {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(180, 60, 5, 0.75)";
+        ctx.fillStyle = "rgba(37, 99, 235, 0.2)";
         ctx.fill();
       });
 
@@ -114,7 +114,7 @@ const Home = () => {
           </div>
 
           {/* Current Role card */}
-          <div className="relative z-10 bg-white rounded-xl px-4 py-3 border border-slate-200 shadow-md w-full max-w-xs md:max-w-65">
+          <div className="hidden md:block relative z-10 bg-white rounded-xl px-4 py-3 border border-slate-200 shadow-md w-full max-w-xs md:max-w-65">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 rounded-md bg-blue-50 flex items-center justify-center">
@@ -146,9 +146,9 @@ const Home = () => {
         {/* Bottom on mobile / Left on desktop: Text */}
         <div className="flex-1 text-center md:text-left md:order-1">
           {/* Role badge */}
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-[#2563EB] text-xs font-bold px-4 py-1.5 rounded-full mb-6 mx-auto md:mx-0">
+          <div className="hidden md:inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-[#2563EB] text-xs font-bold px-4 py-1.5 rounded-full mb-6 mx-auto md:mx-0">
             <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
-            Software Engineer · Full Stack · AI
+            Software Engineer · AI
           </div>
 
           {/* Heading */}
