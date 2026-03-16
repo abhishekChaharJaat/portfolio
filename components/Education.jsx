@@ -1,129 +1,95 @@
-import React from "react";
-import { HiOutlineAcademicCap } from "react-icons/hi";
-import {
-  FaSchool,
-  FaUniversity,
-  FaMapMarkerAlt,
-  FaCheckCircle,
-} from "react-icons/fa";
+import { FaUniversity, FaMapMarkerAlt, FaCheckCircle, FaCalendarAlt, FaSpinner } from "react-icons/fa";
 
 const education = [
   {
-    icon: FaSchool,
-    degree: "High School",
-    institution: "Delhi Public School",
-    location: "Refinery Nagar Township, Mathura, U.P.",
-    startDate: "2007",
-    endDate: "2017",
-    status: "Completed",
-  },
-  {
-    icon: FaSchool,
-    degree: "Intermediate (10+2)",
-    institution: "Delhi Public School",
-    location: "Refinery Nagar Township, Mathura, U.P.",
-    startDate: "2017",
-    endDate: "2019",
-    status: "Completed",
-  },
-  {
-    icon: FaUniversity,
-    degree: "Bachelor of Arts (B.A)",
-    institution: "Dr. Bhimrao Ambedkar University",
-    location: "Agra, U.P.",
-    startDate: "2019",
-    endDate: "2022",
-    status: "Completed",
-  },
-  {
-    icon: FaUniversity,
-    degree: "Bachelor of Computer Applications",
+    degree: "Bachelor of Computer Applications (BCA)",
     institution: "GLA University",
     location: "Chaumuhan, Mathura, U.P.",
-    startDate: "2022",
-    endDate: "2025",
+    period: "2022 – 2025",
     status: "Completed",
   },
   {
-    icon: FaUniversity,
-    degree: "Masters of Computer Applications",
+    degree: "Masters of Computer Applications (MCA)",
     institution: "GLA University",
     location: "Chaumuhan, Mathura, U.P.",
-    startDate: "2025",
-    endDate: "2027",
+    period: "2025 – 2027",
     status: "Pursuing",
   },
 ];
 
 const Education = () => {
   return (
-    <section id="education" className="py-20 bg-[#F8FFFE] scroll-mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-14" data-aos="fade-up">
-          <h2 className="text-4xl font-bold text-[#1B2B48]">Education</h2>
-          <div className="mx-auto mt-3 h-1 w-16 bg-[#13866F] rounded-full" />
+    <section id="education" className="py-24 bg-[#F8FAFC] scroll-mt-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <div className="text-center mb-16" data-aos="fade-up">
+          <span className="text-xs font-bold text-[#2563EB] uppercase tracking-[0.15em] mb-2 block">
+            Academic Background
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+            Education
+          </h2>
+          <div className="mx-auto mt-3 h-1 w-12 bg-[#2563EB] rounded-full" />
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Central vertical line */}
-          <div className="absolute left-1/2 -translate-x-px bg-[#13866F] w-0.5 h-full z-0" />
-
-          <ul className="space-y-12">
-            {[...education].reverse().map((edu, idx) => {
-              const Icon = edu.icon || HiOutlineAcademicCap;
-              return (
-                <li
-                  key={idx}
-                  className={`relative flex flex-col md:flex-row md:items-center cursor-pointer ${
-                    idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+        <div className="grid sm:grid-cols-2 gap-6">
+          {education.map((edu, i) => (
+            <div
+              key={i}
+              className="bg-white border border-slate-200 rounded-2xl p-7 hover:border-blue-200 hover:shadow-lg transition-all group"
+              data-aos="fade-up"
+              data-aos-delay={i * 100}
+            >
+              {/* Icon + Status */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center group-hover:bg-[#2563EB] transition-colors">
+                  <FaUniversity className="text-[#2563EB] group-hover:text-white transition-colors" size={20} />
+                </div>
+                <span
+                  className={`text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5 ${
+                    edu.status === "Pursuing"
+                      ? "bg-amber-50 text-amber-600 border border-amber-200"
+                      : "bg-blue-50 text-[#2563EB] border border-blue-100"
                   }`}
-                  data-aos="fade-up"
-                  data-aos-delay={`${idx * 100}`}
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#13866F] border-2 border-white shadow-md z-10" />
+                  {edu.status === "Pursuing" ? (
+                    <FaSpinner className="animate-spin" size={10} />
+                  ) : (
+                    <FaCheckCircle size={10} />
+                  )}
+                  {edu.status}
+                </span>
+              </div>
 
-                  {/* Card */}
-                  <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-5 md:p-6 md:w-5/12 z-20 border border-gray-100">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-[#E8F5F0] flex items-center justify-center shrink-0">
-                        <Icon className="w-5 h-5 text-[#13866F]" />
-                      </div>
-                      <div>
-                        <h4 className="text-base font-bold text-[#1B2B48] leading-snug">
-                          {edu.degree}
-                        </h4>
-                        <p className="text-sm text-[#13866F] font-medium">
-                          {edu.institution}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-sm text-gray-500 flex items-center gap-1.5 mb-1">
-                      <FaMapMarkerAlt className="text-gray-400 shrink-0" size={12} />
-                      {edu.location}
-                    </p>
-                    <p className="text-sm text-gray-500 flex items-center gap-2">
-                      {edu.startDate} – {edu.endDate}
-                      <span
-                        className={`font-semibold flex items-center gap-1 ${
-                          edu.status === "Pursuing"
-                            ? "text-amber-600"
-                            : "text-[#13866F]"
-                        }`}
-                      >
-                        · {edu.status}
-                        {edu.status === "Completed" && (
-                          <FaCheckCircle size={12} />
-                        )}
-                      </span>
-                    </p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+              {/* Degree */}
+              <h4 className="text-base font-extrabold text-[#0F172A] leading-snug mb-1">
+                {edu.degree}
+              </h4>
+
+              {/* Institution */}
+              <p className="text-sm font-semibold text-[#2563EB] mb-4">
+                {edu.institution}
+              </p>
+
+              {/* Divider */}
+              <div className="h-px bg-slate-100 mb-4" />
+
+              {/* Meta */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-xs text-slate-400">
+                  <FaMapMarkerAlt size={11} className="shrink-0 text-slate-300" />
+                  {edu.location}
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-400">
+                  <FaCalendarAlt size={11} className="shrink-0 text-slate-300" />
+                  {edu.period}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,115 +1,193 @@
-import React from "react";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaTwitter,
-  FaDownload,
-  FaCircle,
-} from "react-icons/fa";
+"use client";
+
+import { useEffect, useRef } from "react";
+import { FaGithub, FaLinkedin, FaArrowRight, FaDownload } from "react-icons/fa";
 import Image from "next/image";
 
 const Home = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animId;
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const NODES = 55;
+    const MAX_DIST = 140;
+
+    const nodes = Array.from({ length: NODES }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 1.5 + 1,
+    }));
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      nodes.forEach((n) => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+      });
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            const alpha = (1 - dist / MAX_DIST) * 0.25;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.strokeStyle = `rgba(37, 99, 235, ${alpha})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      nodes.forEach((n) => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(37, 99, 235, 0.45)";
+        ctx.fill();
+      });
+
+      animId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
   return (
     <section
       id="home"
-      className="flex items-center justify-center min-h-screen bg-linear-to-br from-[#F9FBFA] via-[#F0F4F3] to-[#E6ECEA] text-[#394045] px-6 scroll-mt-20"
+      className="relative flex items-center justify-center min-h-screen bg-white px-6 scroll-mt-20 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 w-full py-20">
-        {/* Text Content */}
-        <div className="text-center md:text-left max-w-xl">
-          {/* Available badge */}
-          <div className="inline-flex items-center gap-2 bg-[#E0F5EF] text-[#13866F] text-sm font-medium px-4 py-1.5 rounded-full mb-6 border border-[#13866F]/20">
-            <FaCircle size={8} className="animate-pulse" />
-            Available for new opportunities
+      {/* Neural network canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full pointer-events-none"
+      />
+
+      <div className="relative max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20 w-full py-32 z-10">
+
+        {/* ── Left: Text ── */}
+        <div className="flex-1 text-center md:text-left">
+
+          {/* Role badge */}
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-[#2563EB] text-xs font-bold px-4 py-1.5 rounded-full mb-6 mx-auto md:mx-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] animate-pulse" />
+            Software Engineer · Full Stack · AI
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-[#1B2B48] leading-tight">
-            Hi, I&apos;m <span className="text-[#13866F]">Abhishek</span>
-            <br />
-            <span className="text-[#18475A]">Chahar</span>
+          {/* Heading */}
+          <h1
+            style={{ fontFamily: "'Lora', serif", fontWeight: 700 }}
+            className="text-3xl sm:text-4xl lg:text-5xl leading-[1.15] text-[#0F172A] mb-5"
+          >
+            <span className="text-[#0F172A] italic">Abhishek Chahar</span>
           </h1>
 
-          <p className="text-base sm:text-lg font-semibold text-[#496D75] mb-3 tracking-wide">
-            Frontend Engineer &nbsp;·&nbsp; Full Stack Developer
+          {/* Bio */}
+          <p className="text-base text-slate-500 leading-relaxed mb-8 max-w-lg mx-auto md:mx-0">
+            I build fast, scalable web apps with{" "}
+            <span className="font-semibold text-[#0F172A]">React.js</span>,{" "}
+            <span className="font-semibold text-[#0F172A]">Next.js</span> &amp;{" "}
+            <span className="font-semibold text-[#0F172A]">Node.js</span> — and
+            work with{" "}
+            <span className="font-semibold text-[#0F172A]">LLMs</span>,{" "}
+            <span className="font-semibold text-[#0F172A]">LangChain</span> &amp;{" "}
+            <span className="font-semibold text-[#0F172A]">FastAPI</span> to
+            build intelligent AI-powered products.
           </p>
-
-          <p className="text-base text-[#5a7a82] leading-relaxed mb-8 max-w-lg">
-            I build clean, modern, and responsive web experiences using
-            React.js, Redux &amp; Tailwind CSS — turning complex problems into
-            elegant digital solutions.
-          </p>
-
-          {/* Social Links */}
-          <div className="flex justify-center md:justify-start gap-3 mb-8">
-            <a
-              href="https://github.com/abhishekChaharJaat"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-[#394045] hover:bg-[#13866F] hover:text-white hover:border-[#13866F] transition-all duration-200 shadow-sm"
-              aria-label="GitHub"
-            >
-              <FaGithub size={18} />
-            </a>
-            <a
-              href="http://linkedin.com/in/abhishek-chahar-jaat"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-[#394045] hover:bg-[#13866F] hover:text-white hover:border-[#13866F] transition-all duration-200 shadow-sm"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin size={18} />
-            </a>
-            <a
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-[#394045] hover:bg-[#13866F] hover:text-white hover:border-[#13866F] transition-all duration-200 shadow-sm"
-              aria-label="Twitter"
-            >
-              <FaTwitter size={18} />
-            </a>
-          </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-3">
+          <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-8">
             <a
               href="#projects"
-              className="bg-[#13866F] hover:bg-[#0f5a4c] text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg"
+              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg shadow-blue-200 text-sm"
             >
-              View Projects
-            </a>
-            <a
-              href="#contact"
-              className="border-2 border-[#13866F] text-[#13866F] hover:bg-[#13866F] hover:text-white px-6 py-3 rounded-lg font-medium transition-all duration-300"
-            >
-              Contact Me
+              View My Work <FaArrowRight size={12} />
             </a>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 border-2 border-gray-200 bg-white text-[#394045] hover:border-[#13866F] hover:text-[#13866F] px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-sm"
+              className="inline-flex items-center gap-2 border border-slate-200 text-slate-400 hover:border-slate-300 hover:text-slate-600 bg-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 text-sm"
             >
-              <FaDownload size={14} />
-              Resume
+              <FaDownload size={12} /> Resume
             </a>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-slate-100 max-w-sm mx-auto md:mx-0 mb-6" />
+
+          {/* Social links */}
+          <div className="flex justify-center md:justify-start items-center gap-3">
+            <span className="text-xs text-slate-400 font-medium">Find me on</span>
+            {[
+              { href: "https://github.com/abhishekChaharJaat",       Icon: FaGithub,   label: "GitHub" },
+              { href: "http://linkedin.com/in/abhishek-chahar-jaat", Icon: FaLinkedin, label: "LinkedIn" },
+            ].map(({ href, Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-[#2563EB] hover:text-white hover:border-[#2563EB] transition-all duration-200"
+              >
+                <Icon size={15} />
+              </a>
+            ))}
           </div>
         </div>
 
-        {/* Profile Image */}
-        <div className="relative shrink-0">
-          <div className="w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-2xl border-4 border-white ring-4 ring-[#13866F]/30 hover:ring-[#13866F]/60 transition duration-300 relative">
+        {/* ── Right: Image ── */}
+        <div className="shrink-0 relative flex items-center justify-center">
+          {/* Soft glow behind image */}
+          <div className="absolute w-72 h-72 rounded-full bg-blue-100 opacity-40 blur-3xl" />
+
+          {/* Circular image */}
+          <div
+            className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-4 ring-blue-100 z-10"
+          >
             <Image
               src="/images/me3.jpg"
               alt="Abhishek Chahar"
               fill
-              className="object-cover"
+              className="object-cover object-top"
               priority
             />
           </div>
-          {/* Decorative dashed ring */}
-          <div className="absolute -inset-4 rounded-full border-2 border-dashed border-[#13866F]/20 -z-10 animate-spin-slow" />
         </div>
+
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-50 z-10">
+        <div className="w-4 h-7 rounded-full border-2 border-slate-400 flex items-start justify-center pt-1">
+          <div className="w-0.5 h-1.5 rounded-full bg-slate-400 animate-bounce" />
+        </div>
+        <span className="text-[9px] text-slate-400 font-medium tracking-widest uppercase">Scroll</span>
       </div>
     </section>
   );
